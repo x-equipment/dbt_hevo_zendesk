@@ -1,0 +1,145 @@
+version: 2
+
+models:
+  - name: stg_zendesk__ticket
+
+    columns:
+      - name: ticket_id
+        type: varchar
+        tests:
+          - dbt_constraints.primary_key
+
+      - name: assignee_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__assignee')
+              pk_column_name: assignee_id
+
+      - name: brand_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__brand')
+              pk_column_name: brand_id
+
+      - name: requester_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__requester')
+              pk_column_name: requester_id
+
+      - name: submitter_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__submitter')
+              pk_column_name: submitter_id
+
+      - name: organization_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__organization')
+              pk_column_name: organization_id
+
+      - name: team_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__team')
+              pk_column_name: team_id
+
+  - name: stg_zendesk__ticket_tag
+
+    columns:
+      - name: ticket_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__ticket')
+              pk_column_name: ticket_id
+
+  - name: stg_zendesk__ticket_custom_attribute
+
+    columns:
+      - name: ticket_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__ticket')
+              pk_column_name: ticket_id
+
+  - name: stg_zendesk__ticket_comment
+
+    columns:
+      - name: comment_id
+        type: varchar
+        tests:
+          - dbt_constraints.primary_key
+
+      - name: ticket_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__ticket')
+              pk_column_name: ticket_id
+
+      - name: user_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__user')
+              pk_column_name: user_id
+
+  - name: stg_zendesk__ticket_metric
+
+    columns:
+      - name: metric_id
+        type: varchar
+        tests:
+          - dbt_constraints.primary_key
+
+      - name: ticket_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__ticket')
+              pk_column_name: ticket_id
+
+  - name: stg_zendesk__satisfaction_rating
+
+    columns:
+      - name: rating_id
+        type: varchar
+        tests:
+          - dbt_constraints.primary_key
+
+      - name: ticket_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__ticket')
+              pk_column_name: ticket_id
+
+      - name: assignee_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__assignee')
+              pk_column_name: assignee_id
+
+      - name: requester_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__requester')
+              pk_column_name: requester_id
+
+      - name: team_id
+        type: varchar
+        tests:
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('stg_zendesk__team')
+              pk_column_name: team_id
