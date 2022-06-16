@@ -1,0 +1,78 @@
+# dbt run-operation generate_source --args '{"schema_name": "external", "database_name": "raw_mywheels", "generate_columns": false}'
+
+version: 2
+
+sources:
+  - name: zendesk
+    description: ""
+    database: "{{var ('zendesk_database', target.database)}}"
+    schema: "{{var ('zendesk_schema', 'zendesk')}}"
+
+    loader: hevo
+    loaded_at_field: to_timestamp(__hevo__loaded_at, 3)
+
+    freshness:
+        warn_after: {count: 24, period: hour}
+        error_after: {count: 48, period: hour}
+
+    quoting:
+        database: false
+        schema: false
+        identifier: false
+
+    tables:
+      # Zendesk Support
+      - name: ticket
+        identifier: zendesk_tickets
+
+      - name: ticket_comment
+        identifier: zendesk_comments
+
+      # - name: ticket_form
+      #   identifier: zendesk_ticket_forms
+
+      - name: ticket_field
+        identifier: zendesk_ticket_fields
+
+      - name: ticket_metric
+        identifier: zendesk_ticket_metrics
+
+      - name: ticket_metric_event
+        identifier: zendesk_ticket_events
+
+      - name: user
+        identifier: zendesk_users
+
+      - name: organization
+        identifier: zendesk_organizations
+
+      - name: organization_membership
+        identifier: zendesk_organization_memberships
+
+      - name: team
+        identifier: zendesk_groups
+
+      - name: group_membership
+        identifier: zendesk_group_memberships
+
+      # - name: sla_policy
+      #   identifier: zendesk_sla_policies
+
+      - name: custom_role
+        identifier: zendesk_custom_roles
+
+      - name: brand
+        identifier: zendesk_brands
+
+      - name: satisfaction_rating
+        identifier: zendesk_satisfaction_ratings
+
+      # - name: schedule
+      #   identifier: zendesk_schedules
+
+      # Zendesk Talk
+      # - name: call
+      #   identifier: zendesk_calls
+
+      # - name: leg
+      #   identifier: zendesk_legs
