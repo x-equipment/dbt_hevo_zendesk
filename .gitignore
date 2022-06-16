@@ -1,0 +1,12 @@
+*~
+venv/
+dbt/
+
+logs/
+modules/
+
+!target/
+target/*
+!target/assets/
+target/compiled/
+target/run/

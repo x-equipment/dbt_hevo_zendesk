@@ -1,0 +1,33 @@
+name: 'hevo_zendesk'
+version: '0.0.1'
+
+config-version: 2
+
+profile: 'hevo_zendesk'
+
+analysis-paths: ["analysis"]
+asset-paths: ["assets"]
+seed-paths: ["data"]
+log-path: "logs"
+macro-paths: ["macros"]
+model-paths: ["models"]
+packages-install-path: "modules"
+snapshot-paths: ["snapshots"]
+target-path: "target"
+test-paths: ["tests"]
+
+clean-targets: ["target", "logs", "modules", "dbt_packages"]
+
+query-comment: null
+
+quoting:
+  database: false
+  schema: false
+  identifier: false
+
+models:
+  hevo_zendesk:
+    staging:
+      +enabled: true
+      +quote_columns: true
+      +materialized: view
