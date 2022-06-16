@@ -10,3 +10,8 @@ packages:
   # https://hub.getdbt.com/dbt-labs/dbt_utils/latest/
   - package: dbt-labs/dbt_utils
     version: [">=0.8.5"]
+
+  # dbt_constraints, package to generate database constraints based on tests in a dbt project
+  # https://hub.getdbt.com/snowflake-labs/dbt_constraints/latest/
+  - package: Snowflake-Labs/dbt_constraints
+    version: [">=0.3.0"]
