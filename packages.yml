@@ -1,0 +1,7 @@
+packages:
+  # dbt Hub packages
+
+  # codegen, macros to generate dbt code
+  # https://hub.getdbt.com/dbt-labs/codegen/latest/
+  - package: dbt-labs/codegen
+    version: [">=0.6.0"]
