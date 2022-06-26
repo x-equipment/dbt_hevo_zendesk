@@ -5,6 +5,14 @@ with __source as (
     *
   from
     {{ ref('int_zendesk__user') }}
+
+  where
+    user_id in (
+      select distinct
+        {{ __ref.model }}_id
+      from
+        {{ ref('int_zendesk__ticket') }}
+    )
 ),
 
 __cleans as (
