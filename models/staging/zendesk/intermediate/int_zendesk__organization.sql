@@ -12,7 +12,7 @@ select
   {{ __ref.model }}.id::varchar as organization_id,
   {{ __ref.model }}.created_at::timestamp as created_at,
   {{ __ref.model }}.updated_at::timestamp as updated_at,
-  {{ __ref.model }}.name::varchar as organizations,
+  {{ __ref.model }}.name::varchar as organization,
 
   null::boolean as is_archived,
 
