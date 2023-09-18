@@ -30,6 +30,19 @@ quoting:
   schema: false
   identifier: false
 
+vars:
+  # project evaluator configuration
+  dbt_project_evaluator:
+    other_prefixes: ['dbt_']
+
+    primary_key_test_macros: [
+      ["dbt.test_unique", "dbt.test_not_null"],
+      ["dbt_utils.test_unique_combination_of_columns"],
+      ["dbt_constraints.test_primary_key"]
+    ]
+
+  exclude_packages: ["all"]
+
 models:
   dbt_hevo_zendesk:
     staging:
@@ -37,3 +50,11 @@ models:
       +enabled: true
       +quote_columns: true
       +materialized: view
+
+  dbt_project_evaluator:
+    +schema: dbt
+    +enabled: "{{ env_var('DBT_PROJECT_EVALUATOR__ENABLED', 'true') | lower == 'true' | as_bool }}"
+
+tests:
+  dbt_project_evaluator:
+    +severity: "{{ env_var('DBT_PROJECT_EVALUATOR__SEVERITY', 'warn') }}"
