@@ -1,7 +1,5 @@
-name: 'hevo_zendesk'
-version: '0.0.1'
-
-require-dbt-version: [">=1.0.0", "<2.0.0"]
+name: 'dbt_hevo_zendesk'
+version: '0.0.3'
 
 config-version: 2
 
@@ -18,9 +16,14 @@ snapshot-paths: ["snapshots"]
 target-path: "target"
 test-paths: ["tests"]
 
-clean-targets: ["target", "logs", "modules", "dbt_packages"]
+clean-targets:
+  - "logs"
+  - "modules"
+  - "target"
 
 query-comment: null
+
+require-dbt-version: [">=1.5.0", "<2.0.0"]
 
 quoting:
   database: false
@@ -28,8 +31,9 @@ quoting:
   identifier: false
 
 models:
-  hevo_zendesk:
+  dbt_hevo_zendesk:
     staging:
+      +schema: zendesk
       +enabled: true
       +quote_columns: true
       +materialized: view
